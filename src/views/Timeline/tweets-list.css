@@ -1,0 +1,8 @@
+#scrollableDiv h4.ant-list-item-meta-title {
+    margin-top: 0;
+}
+
+#scrollableDiv .ant-list-item {
+    padding-left: 0;
+    padding-right: 0;
+}

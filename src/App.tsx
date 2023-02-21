@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import { RouterProvider } from 'react-router-dom';
+import { ConfigProvider, theme as antdTheme } from "antd";
 
-function App() {
+import { generateAppRoutes } from './index-routing';
+import { ThemeContext } from 'effects/Theme';
+import { IdentityContext } from 'effects/Identity';
+
+export function App() {
+  const { theme } = useContext(ThemeContext);
+  const { loginUser } = useContext(IdentityContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConfigProvider theme={{ algorithm: theme === 'dark' ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm }}>
+      <div className={`app-container ${theme}`}>
+        <div className="app relative h-screen w-full min-w-min bg-blue-400 dark:bg-black text-black dark:text-white">
+          <RouterProvider router={generateAppRoutes(loginUser)} />
+        </div>
+      </div>
+    </ConfigProvider>
   );
 }
-
-export default App;

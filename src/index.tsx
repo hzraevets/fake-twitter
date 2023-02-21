@@ -1,15 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { QueryClientProvider } from 'react-query';
+
+import { ThemeProvider } from 'effects/Theme';
+import { IdentityProvider } from 'effects/Identity';
+import { TweetProvider } from 'effects/Tweet';
+import { timeLine } from 'query/TimeLine';
+
 import './index.css';
-import App from './App';
+import { App } from "./App";
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(
+ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
-);
-root.render(
+).render(
   <React.StrictMode>
-    <App />
+    <TweetProvider>
+      <ThemeProvider>
+        <IdentityProvider>
+          <QueryClientProvider client={timeLine}>
+            <App/>
+          </QueryClientProvider>
+        </IdentityProvider>
+      </ThemeProvider>
+    </TweetProvider>
   </React.StrictMode>
 );
 
