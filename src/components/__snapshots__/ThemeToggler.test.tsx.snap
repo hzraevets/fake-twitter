@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ThemeToggler render ThemeToggler to snapshot 1`] = `
+<div
+  className="absolute top-2 right-2 cursor-pointer select-none"
+  onClick={[Function]}
+>
+  <button
+    aria-checked={false}
+    className="ant-switch css-dev-only-do-not-override-diro6f"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="switch"
+    type="button"
+  >
+    <div
+      className="ant-switch-handle"
+    />
+    <span
+      className="ant-switch-inner"
+    >
+      <span
+        className="ant-switch-inner-checked"
+      />
+      <span
+        className="ant-switch-inner-unchecked"
+      />
+    </span>
+  </button>
+</div>
+`;

@@ -5,7 +5,7 @@ import { QueryClientProvider } from 'react-query';
 import { ThemeProvider } from 'effects/Theme';
 import { IdentityProvider } from 'effects/Identity';
 import { TweetProvider } from 'effects/Tweet';
-import { timeLine } from 'query/TimeLine';
+import { timeLineQuery } from 'query/TimeLine';
 
 import './index.css';
 import { App } from "./App";
@@ -18,7 +18,7 @@ ReactDOM.createRoot(
     <TweetProvider>
       <ThemeProvider>
         <IdentityProvider>
-          <QueryClientProvider client={timeLine}>
+          <QueryClientProvider client={timeLineQuery}>
             <App/>
           </QueryClientProvider>
         </IdentityProvider>

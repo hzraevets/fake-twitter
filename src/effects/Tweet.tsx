@@ -9,7 +9,7 @@ import {
   ReadNonDeleteTweetResponse,
 } from 'models';
 
-interface TweetContextInterface {
+export interface TweetContextInterface {
   allTweets: TweetStorage;
   nextTweetId: number;
   addNewTweet: (params: CreateNewTweetParams) => void;

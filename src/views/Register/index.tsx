@@ -11,6 +11,12 @@ import {
   FormFieldType,
   shouldDisableSubmit,
   getErrorMessage,
+  usernameEmptyMessage,
+  usernameAlreadyInUseMessage,
+  firstnameEmptyMessage,
+  passwordEmptyMessage,
+  rePasswordEmptyMessage,
+  rePasswordMismatchMessage,
 } from './form';
 
 export function Register() {
@@ -72,10 +78,9 @@ export function Register() {
                     name="username"
                     control={control}
                     rules={{
-                      required: 'Username should not be empty',
+                      required: usernameEmptyMessage,
                       validate: {
-                        checkUniq: v => identity[v] === undefined
-                          || 'This username already registered, please login or choose another one.',
+                        checkUniq: v => identity[v] === undefined || usernameAlreadyInUseMessage,
                       },
                     }}
                     render={({ field }) => (
@@ -90,7 +95,7 @@ export function Register() {
                   <Controller
                     name="firstname"
                     control={control}
-                    rules={{ required: 'First name should not be empty' }}
+                    rules={{ required: firstnameEmptyMessage }}
                     render={({ field }) => (
                       <Input
                         {...field}
@@ -103,7 +108,7 @@ export function Register() {
                   <Controller
                     name="password"
                     control={control}
-                    rules={{ required: 'Password should not be empty' }}
+                    rules={{ required: passwordEmptyMessage }}
                     render={({ field }) => (
                       <Input
                         {...field}
@@ -118,10 +123,9 @@ export function Register() {
                     name="rePassword"
                     control={control}
                     rules={{
-                      required: 'You must re-enter the password!',
+                      required: rePasswordEmptyMessage,
                       validate: {
-                        checkSame: v => v === getValues('password')
-                          || 'Password re-enter confirmation mismatched'
+                        checkSame: v => v === getValues('password') || rePasswordMismatchMessage,
                       },
                     }}
                     render={({ field }) => (

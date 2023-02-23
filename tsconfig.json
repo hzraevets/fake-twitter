@@ -23,6 +23,7 @@
     "paths": {
       "components/*": ["components/*"],
       "effects/*": ["effects/*"],
+      "mocks/*": ["mocks/*"],
       "models/*": ["models/*"],
       "query/*": ["query/*"],
       "utils/*": ["utils/*"],

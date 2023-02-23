@@ -164,7 +164,7 @@ function hex(x) {
   return x.join('');
 }
 
-export function md5(s) {
+function md5(s: string): string {
   return hex(md51(s));
 }
 
@@ -186,3 +186,4 @@ if (md5('hello') != '5d41402abc4b2a76b9719d911017c592') {
   }
 }
 /* eslint-enable */
+export { md5 };

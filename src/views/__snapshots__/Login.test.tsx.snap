@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login render Login to snapshot 1`] = `
+<div
+  className="home-container h-full flex"
+>
+  <div
+    className="home m-auto"
+  >
+    <div
+      className="ant-card ant-card-bordered h-full css-dev-only-do-not-override-diro6f"
+    >
+      <div
+        className="ant-card-body"
+        style={Object {}}
+      >
+        <div
+          className="absolute top-2 right-2 cursor-pointer select-none"
+          onClick={[Function]}
+        >
+          <button
+            aria-checked={false}
+            className="ant-switch css-dev-only-do-not-override-diro6f"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="switch"
+            type="button"
+          >
+            <div
+              className="ant-switch-handle"
+            />
+            <span
+              className="ant-switch-inner"
+            >
+              <span
+                className="ant-switch-inner-checked"
+              />
+              <span
+                className="ant-switch-inner-unchecked"
+              />
+            </span>
+          </button>
+        </div>
+        <h1
+          className="text-2xl font-bold mt-0 mb-5"
+        >
+          Welcome to Fake Twitter!
+        </h1>
+        <form
+          onSubmit={[Function]}
+        >
+          <div
+            className="ant-space css-dev-only-do-not-override-diro6f ant-space-vertical w-72 md:w-96"
+            style={Object {}}
+          >
+            <div
+              className="ant-space-item"
+              style={
+                Object {
+                  "marginBottom": 24,
+                }
+              }
+            >
+              <div
+                className="ant-space css-dev-only-do-not-override-diro6f ant-space-vertical w-full"
+                style={Object {}}
+              >
+                <div
+                  className="ant-space-item"
+                  style={
+                    Object {
+                      "marginBottom": 16,
+                    }
+                  }
+                >
+                  <input
+                    className="ant-input css-dev-only-do-not-override-diro6f"
+                    disabled={false}
+                    name="username"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    placeholder="username"
+                    style={Object {}}
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="ant-space-item"
+                  style={Object {}}
+                >
+                  <input
+                    className="ant-input css-dev-only-do-not-override-diro6f"
+                    disabled={false}
+                    name="password"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    placeholder="password"
+                    style={Object {}}
+                    type="password"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              className="ant-space-item"
+              style={Object {}}
+            >
+              <div
+                className="ant-space css-dev-only-do-not-override-diro6f ant-space-horizontal ant-space-align-center float-right"
+                style={Object {}}
+              >
+                <div
+                  className="ant-space-item"
+                  style={
+                    Object {
+                      "marginRight": 24,
+                    }
+                  }
+                >
+                  <a
+                    href="/register"
+                    onClick={[Function]}
+                  >
+                    Create new account
+                  </a>
+                </div>
+                <div
+                  className="ant-space-item"
+                  style={Object {}}
+                >
+                  <button
+                    className="ant-btn css-dev-only-do-not-override-diro6f ant-btn-primary"
+                    disabled={false}
+                    onClick={[Function]}
+                    type="submit"
+                  >
+                    <span>
+                      Login
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;

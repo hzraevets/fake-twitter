@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewTweet render NewTweet to snapshot 1`] = `
+<div
+  className="ant-card ant-card-bordered w-80 break-inside-avoid-column mb-4 css-dev-only-do-not-override-diro6f"
+>
+  <div
+    className="ant-card-body"
+    style={Object {}}
+  >
+    <div
+      className="ant-space css-dev-only-do-not-override-diro6f ant-space-vertical w-full"
+      style={Object {}}
+    >
+      <div
+        className="ant-space-item"
+        style={
+          Object {
+            "marginBottom": 16,
+          }
+        }
+      >
+        <textarea
+          className="ant-input max-h-32 css-dev-only-do-not-override-diro6f"
+          disabled={false}
+          onChange={[Function]}
+          onCompositionEnd={[Function]}
+          onCompositionStart={[Function]}
+          onKeyDown={[Function]}
+          placeholder="What's happening?"
+          rows={3}
+          style={
+            Object {
+              "resize": undefined,
+            }
+          }
+          value=""
+        />
+      </div>
+      <div
+        className="ant-space-item"
+        style={Object {}}
+      >
+        <button
+          className="ant-btn css-dev-only-do-not-override-diro6f ant-btn-primary float-right"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        >
+          <span>
+            Tweet
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
