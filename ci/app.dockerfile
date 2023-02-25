@@ -1,14 +1,19 @@
-FROM node:16.16.0
+### STAGE 1: Build ###
+FROM node:16.16.0 AS build
 
 ENV PUBLIC_URL=" "
+WORKDIR /usr/src/app
+COPY . .
+RUN npm ci
+RUN npm run build-docker
 
-RUN git clone https://github.com/hzraevets/fake-twitter
+### STAGE 2: Run ###
+From nginx:1.17.6-alpine
 
-WORKDIR fake-twitter
+EXPOSE 80
 
-RUN npm install && npm run build && \
-    npm install -g serve
+COPY nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 3000
-
-CMD ["serve", "-s", "build", "-p", "3000"]
+RUN rm -R /usr/share/nginx/html/*
+WORKDIR /usr/share/nginx/html
+COPY --from=build /usr/src/app/build/ .
