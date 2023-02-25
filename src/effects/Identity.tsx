@@ -7,15 +7,16 @@ import React, {
   ReactNode,
 } from 'react';
 
-import { UserStorage } from 'models';
+import { UserStorage, User } from 'models';
+import { md5 } from 'utils/md5';
 
-interface IdentityContextInterface {
+export interface IdentityContextInterface {
   identity: UserStorage;
   setIdentity: Dispatch<SetStateAction<UserStorage>>;
   loginUser: string | null;
   setLoginUser: Dispatch<SetStateAction<string | null>>;
   logout: () => void;
-  saveIdentity: (identity: UserStorage) => void;
+  register: (newUser: User) => UserStorage;
 }
 
 const IdentityContext = createContext<IdentityContextInterface>({
@@ -24,7 +25,7 @@ const IdentityContext = createContext<IdentityContextInterface>({
   loginUser: null,
   setLoginUser: () => null,
   logout: () => null,
-  saveIdentity: () => null,
+  register: () => ({}),
 });
 
 const getIdentity = (): UserStorage => {
@@ -57,8 +58,17 @@ const IdentityProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  function saveIdentity(newIdentity: UserStorage) {
-    localStorage.setItem('identity', JSON.stringify(newIdentity));
+  function register(newUser: User) {
+    const newStorage: UserStorage = {
+      ...identity,
+      [newUser.username]: {
+        ...newUser,
+        password: md5(newUser.password),
+      },
+    };
+
+    localStorage.setItem('identity', JSON.stringify(newStorage));
+    return newStorage;
   }
 
   useEffect(() => {
@@ -87,7 +97,7 @@ const IdentityProvider = ({ children }: { children: ReactNode }) => {
         loginUser,
         setLoginUser,
         logout,
-        saveIdentity,
+        register,
       }}
     >
       {children}

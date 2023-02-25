@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
-import { Card, Input, Button, Space } from 'antd';
+import { Card, Input, Button, Space, message } from 'antd';
 import { useForm, FieldValues, Controller } from 'react-hook-form';
 
 import { LoginField } from 'models';
@@ -8,7 +8,7 @@ import { IdentityContext } from 'effects/Identity';
 import { TweetContext } from 'effects/Tweet';
 import { md5 } from 'utils/md5';
 import { ThemeToggler } from 'components/ThemeToggler';
-import { clearThenReFetch } from 'query/TimeLine';
+import { reFetchQuery } from 'query/TimeLine';
 
 export function Login() {
   const { identity, setLoginUser } = useContext(IdentityContext);
@@ -23,7 +23,13 @@ export function Login() {
 
   const onSubmit = (data: FieldValues) => {
     setLoginUser(getValues('username'));
-    clearThenReFetch(readTimeline);
+
+    message.open({
+      type: 'success',
+      content: `Login success. Welcome back ${identity[getValues('username')].firstname}!`,
+    });
+
+    reFetchQuery(readTimeline, true);
   }
 
   function shouldDisableSubmit() {

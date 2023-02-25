@@ -2,10 +2,6 @@
 
 exports[`App render App to snapshot 1`] = `
 <div
-  className="app-container light"
->
-  <div
-    className="app relative h-screen w-full min-w-min bg-blue-400 dark:bg-black text-black dark:text-white"
-  />
-</div>
+  className="app relative h-screen w-full min-w-min bg-blue-400 dark:bg-black text-black dark:text-white"
+/>
 `;

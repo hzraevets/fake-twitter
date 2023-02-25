@@ -1,3 +1,5 @@
+const path = require('node:path');
+
 module.exports = {
   "stories": [
     "../src/**/*.stories.mdx",
@@ -9,6 +11,21 @@ module.exports = {
     "@storybook/addon-interactions",
     "@storybook/preset-create-react-app"
   ],
+  // https://storybook.js.org/recipes/tailwindcss
+  "webpackFinal": async (config) => {
+    config.module.rules.push({
+      test: /\.css$/i,
+      use: [
+        {
+          loader: "postcss-loader",
+          options: { implementation: require.resolve("postcss") },
+        },
+      ],
+      include: path.resolve(__dirname, "../"),
+    });
+    // Return the altered config
+    return config;
+  },
   "framework": "@storybook/react",
   "core": {
     "builder": "@storybook/builder-webpack5"

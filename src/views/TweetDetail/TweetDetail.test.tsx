@@ -8,7 +8,7 @@ import { TweetDetail } from './';
 import { IdentityProvider } from 'effects/Identity';
 import { TweetContextInterface, TweetContext } from 'effects/Tweet';
 import { testUserTweet1, liBaiTweet1 } from 'mocks/tweet';
-import { prepareTweetProviderPropsWithoutCRUD } from 'mocks/action';
+import { prepareTweetProviderPropsWithoutCRUD } from 'mocks/jestAction';
 
 const customRender = (
   tweetId: number,

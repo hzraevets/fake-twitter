@@ -12,7 +12,7 @@ import {
 export interface TweetContextInterface {
   allTweets: TweetStorage;
   nextTweetId: number;
-  addNewTweet: (params: CreateNewTweetParams) => void;
+  addNewTweet: (params: CreateNewTweetParams) => Tweet | null;
   readTimeline: (params: ReadNonDeleteTweetParams) => Promise<ReadNonDeleteTweetResponse>;
   editTweet: (id: number, content: string) => void;
   deleteTweet: (id: number) => void;
@@ -53,9 +53,11 @@ const TweetProvider = ({ children }: { children: ReactNode }) => {
       hashMap: { ...hashMap, [nextTweetId]: newTweet },
       order: [ nextTweetId, ...order ],
     });
+
+    return newTweet;
   }
 
-  function readTimeline({ start, offset = 1 }: ReadNonDeleteTweetParams) {
+  function readTimeline({ start, offset = 5 }: ReadNonDeleteTweetParams) {
     const data: Tweet[] = [];
     let nextCursor: number | null;
 

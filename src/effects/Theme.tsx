@@ -2,10 +2,12 @@ import React, {
   Dispatch,
   SetStateAction,
   useEffect,
+  useCallback,
   createContext,
   useState,
   ReactNode,
 } from 'react';
+import { ConfigProvider, theme as antdTheme } from "antd";
 
 interface ThemeContextInterface {
   theme: string;
@@ -40,13 +42,13 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  useEffect(() => {
-    const refreshTheme = () => {
-      localStorage.setItem('theme', theme);
-    };
-
-    refreshTheme();
+  const refreshTheme = useCallback(() => {
+    localStorage.setItem('theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    refreshTheme();
+  }, [refreshTheme, theme]);
 
   return (
     <ThemeContext.Provider
@@ -56,7 +58,17 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
         toggleTheme,
       }}
     >
-      {children}
+      <div className={`theme-container ${theme}`}>
+        <ConfigProvider
+          theme={{
+            algorithm: theme === 'dark'
+              ? antdTheme.darkAlgorithm
+              : antdTheme.defaultAlgorithm
+          }}
+        >
+          {children}
+        </ConfigProvider>
+      </div>
     </ThemeContext.Provider>
   );
 };

@@ -1,4 +1,4 @@
-import { User, UserStorage } from 'models';
+import { User, UserStorage, RegisterField } from 'models';
 import { md5 } from 'utils/md5';
 
 export const testUser: User = {
@@ -17,3 +17,9 @@ export const storage: UserStorage = {
   testUser: { ...testUser, password: md5(testUser.password) },
   liBai: { ...liBai, password: md5(liBai.password) },
 }
+
+export const notRegisterUser: RegisterField = {
+  username: 'steve',
+  firstname: 'Steve',
+  password: 'abcde',
+};

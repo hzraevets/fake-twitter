@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { TweetsList } from './TweetsList';
 import { timeLineQuery } from 'query/TimeLine';
 import { TweetContext } from 'effects/Tweet';
-import { prepareTweetProviderPropsWithRead } from 'mocks/action';
+import { prepareTweetProviderPropsWithRead } from 'mocks/jestAction';
 import { testUserTweet1, liBaiTweet1 } from 'mocks/tweet';
 
 describe('TweetsList', () => {

@@ -1,10 +1,9 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Input, Button, Space, message } from 'antd';
-import {useForm, Controller, FieldValues} from 'react-hook-form';
+import { useForm, Controller, FieldValues } from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 
-import { md5 } from 'utils/md5';
 import { IdentityContext } from 'effects/Identity';
 import { ThemeToggler } from 'components/ThemeToggler';
 import {
@@ -18,9 +17,10 @@ import {
   rePasswordEmptyMessage,
   rePasswordMismatchMessage,
 } from './form';
+import { User } from 'models';
 
 export function Register() {
-  const { identity, setIdentity, saveIdentity } = useContext(IdentityContext);
+  const { identity, setIdentity, register } = useContext(IdentityContext);
   const [ messageApi, contextHolder ] = message.useMessage();
   const navigate = useNavigate();
 
@@ -35,16 +35,7 @@ export function Register() {
 
   const onSubmit = (data: FieldValues) => {
     delete data.rePassword;
-
-    const newIdentity = {
-      ...identity,
-      [data.username]: {
-        ...data,
-        password: md5(data.password),
-      },
-    };
-
-    saveIdentity(newIdentity);
+    const newStorage = register(data as User);
 
     messageApi.open({
       type: 'success',
@@ -55,7 +46,7 @@ export function Register() {
     setTimeout(() => {
       messageApi.destroy();
       navigate('/login');
-      setIdentity(newIdentity);
+      setIdentity(newStorage);
     }, 2000);
   }
 

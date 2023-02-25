@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef, useEffect, useMemo } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { Card, Spin, Skeleton, Divider, List, Avatar } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -9,7 +9,11 @@ import { Link } from 'react-router-dom';
 
 import { TweetContext } from 'effects/Tweet';
 import { ReadNonDeleteTweetResponse } from 'models';
-import { generateFetchTimeline } from 'query/TimeLine';
+import {
+  generateFetchTimeline,
+  getNextPageParam,
+  flattenQueryPages,
+} from 'query/TimeLine';
 import './tweets-list.css';
 
 export function TweetsList() {
@@ -23,14 +27,8 @@ export function TweetsList() {
     hasNextPage,
     status,
   } = useInfiniteQuery<ReadNonDeleteTweetResponse>('timeline', fetchTimeline, {
-    getNextPageParam: (lastPage, pages) => {
-      return lastPage.nextCursor;
-    },
+    getNextPageParam,
   });
-
-  const dataLength = data ? data.pages.reduce((prev: number, cur: ReadNonDeleteTweetResponse) => {
-    return prev + cur.data.length;
-  }, 0) : 0;
 
   useEffect(() => {
     // https://stackoverflow.com/questions/7668636/check-with-jquery-if-div-has-overflowing-elements/7668692#7668692
@@ -47,48 +45,52 @@ export function TweetsList() {
 
   const now = new Date();
 
+  const flattenTweetList = useMemo(
+    () => flattenQueryPages(data?.pages || []),
+    [data?.pages],
+  );
+
   return (
     <Card className="w-80 overflow-auto break-inside-avoid-column mb-10" ref={elementRef}>
       {status === 'loading' && <div className="w-full flex"><Spin className="m-auto"/></div>}
-      {status === 'error' && <p>Error</p>}
+      {status === 'error' && <p>Unknown Error</p>}
       {status !== 'loading' && status !== 'error' && (
         <InfiniteScroll
-          dataLength={dataLength}
+          dataLength={flattenTweetList.length}
           next={fetchNextPage}
           hasMore={hasNextPage || false}
           loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
           endMessage={<Divider plain className="select-none">It is all, nothing more 🤐</Divider>}
           scrollableTarget="scrollableDiv"
         >
-          {dataLength > 0 ? (data?.pages || []).map((group: ReadNonDeleteTweetResponse, index) => (
+          {flattenTweetList.length > 0 ? (
             <List
-              key={index}
-              dataSource={group.data}
-              renderItem={(item) => (
-                <List.Item key={item.id}>
-                  <Link to={`/tweet/${item.id}`} className="w-full">
+              dataSource={flattenTweetList}
+              renderItem={(tweet, index) => (
+                <List.Item key={`${index}-${tweet.id}`}>
+                  <Link to={`/tweet/${tweet.id}`} className="w-full">
                     <List.Item.Meta
                       avatar={<Avatar size="large" className="bg-slate-500" icon={<UserOutlined/>} />}
                       title={(
                         <div className="select-none">
-                          <span className="first-name text-sm mr-1">{item.firstname}</span>
-                          {(item.updateTime !== item.createTime) && (
+                          <span className="first-name text-sm mr-1">{tweet.firstname}</span>
+                          {(tweet.updateTime !== tweet.createTime) && (
                             <span className="text-xs text-slate-400">edited</span>
                           )}
                           <span className="text-xs text-slate-500 float-right">
-                            {formatDistance(fromUnixTime(item.createTime), now, { addSuffix: true })}
-                          </span>
+                              {formatDistance(fromUnixTime(tweet.createTime), now, { addSuffix: true })}
+                            </span>
                         </div>
                       )}
                       description={(
-                        <p className="m-0 break-words text-sm">{item.content}</p>
+                        <p className="m-0 break-words text-sm">{tweet.content}</p>
                       )}
                     />
                   </Link>
                 </List.Item>
               )}
             />
-          )) : null}
+          ) : null}
         </InfiniteScroll>
       )}
     </Card>

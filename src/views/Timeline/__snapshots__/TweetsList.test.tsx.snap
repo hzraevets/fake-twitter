@@ -95,7 +95,7 @@ exports[`TweetsList render empty TweetList to snapshot 1`] = `
                             <span
                               className="text-xs text-slate-500 float-right"
                             >
-                              about 17 hours ago
+                              about 20 hours ago
                             </span>
                           </div>
                         </h4>
@@ -112,22 +112,6 @@ exports[`TweetsList render empty TweetList to snapshot 1`] = `
                     </div>
                   </a>
                 </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div
-          className="ant-list ant-list-split css-dev-only-do-not-override-diro6f"
-        >
-          <div
-            className="ant-spin-nested-loading css-dev-only-do-not-override-diro6f"
-          >
-            <div
-              className="ant-spin-container"
-            >
-              <ul
-                className="ant-list-items"
-              >
                 <li
                   className="ant-list-item"
                 >
@@ -184,7 +168,7 @@ exports[`TweetsList render empty TweetList to snapshot 1`] = `
                             <span
                               className="text-xs text-slate-500 float-right"
                             >
-                              about 17 hours ago
+                              3 days ago
                             </span>
                           </div>
                         </h4>

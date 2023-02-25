@@ -1,27 +1,30 @@
 import React, { useContext, useState } from 'react';
 import { Card, Input, Button, Space } from 'antd';
+import { useMutation } from 'react-query';
 
 import { IdentityContext } from 'effects/Identity';
 import { TweetContext } from 'effects/Tweet';
-import { clearThenReFetch } from 'query/TimeLine';
+import {
+  addNewTweetMutation,
+  onAddNewTweetMutationSuccess,
+} from 'query/TimeLine';
 
 const { TextArea } = Input;
 
 export function NewTweet() {
   const { loginUser, identity } = useContext(IdentityContext);
-  const { addNewTweet, readTimeline } = useContext(TweetContext);
+  const { addNewTweet } = useContext(TweetContext);
   const [ content, updateContent ] = useState('');
+  const mutation = useMutation(addNewTweetMutation, { onSuccess: onAddNewTweetMutationSuccess });
 
-  const handleTweet = () => {
-    addNewTweet({
-      author: loginUser || 'UNKNOWN_AUTHOR',
-      firstname: loginUser ? identity[loginUser].firstname : 'Unknown',
-      content,
-    });
+  const handleTweet: React.MouseEventHandler = (event) => {
+    event.preventDefault();
 
+    const author = loginUser || 'UNKNOWN_AUTHOR';
+    const firstname = loginUser ? identity[loginUser].firstname : 'Unknown';
+
+    mutation.mutate({ author, firstname, content, addNewTweet });
     updateContent(''); // reset textarea
-
-    clearThenReFetch(readTimeline);
   }
 
   return (
@@ -37,7 +40,7 @@ export function NewTweet() {
         <Button
           type="primary"
           className="float-right"
-          disabled={content === ''}
+          disabled={content === '' || mutation.isLoading}
           onClick={handleTweet}
         >Tweet</Button>
       </Space>
