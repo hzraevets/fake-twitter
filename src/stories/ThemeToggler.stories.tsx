@@ -3,15 +3,14 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ThemeToggler } from 'components/ThemeToggler';
 import { ThemeProvider } from 'effects/Theme';
+import './App.css';
 
 export default {
   title: 'Components/ThemeToggler',
   component: ThemeToggler,
 } as ComponentMeta<typeof ThemeToggler>;
 
-const Template: ComponentStory<typeof ThemeToggler> = (args) => (
-  <ThemeToggler/>
-);
+const Template: ComponentStory<typeof ThemeToggler> = (args) => <ThemeToggler />;
 
 export const SwitchTheme = Template.bind({});
 
@@ -26,10 +25,10 @@ SwitchTheme.decorators = [
     return (
       <ThemeProvider>
         <div className="app relative h-24 w-full min-w-min bg-blue-400 dark:bg-black text-black dark:text-white">
-          <h1 className="text-2xl font-bold">{ description }</h1>
-          <Story/>
+          <h1 className="text-2xl font-bold">{description}</h1>
+          <Story />
         </div>
       </ThemeProvider>
     );
-  }
+  },
 ];

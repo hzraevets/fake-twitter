@@ -5,6 +5,7 @@ import { UserStatus } from 'views/Timeline/UserStatus';
 import { testUser, liBai } from 'mocks/identity';
 import { savedIdentity, identityDecoratorWithMemoryRouterGenerator } from 'utils/stories';
 import { ThemeProvider } from 'effects/Theme';
+import './App.css';
 
 export default {
   title: 'Components/UserStatus',
@@ -12,21 +13,15 @@ export default {
   args: { savedIdentity },
 } as ComponentMeta<typeof UserStatus>;
 
-const Template: ComponentStory<typeof UserStatus> = () => (
-  <UserStatus/>
-);
+const Template: ComponentStory<typeof UserStatus> = () => <UserStatus />;
 
 export const TestUser = Template.bind({});
 
 TestUser.decorators = [
-  identityDecoratorWithMemoryRouterGenerator(
-    `/${testUser.username}`,
-    ':username',
-    { loginUser: testUser.username },
-  ),
+  identityDecoratorWithMemoryRouterGenerator(`/${testUser.username}`, ':username', { loginUser: testUser.username }),
   (Story, Context) => (
     <ThemeProvider>
-      <Story/>
+      <Story />
     </ThemeProvider>
   ),
 ];
@@ -34,14 +29,10 @@ TestUser.decorators = [
 export const LiBai = Template.bind({});
 
 LiBai.decorators = [
-  identityDecoratorWithMemoryRouterGenerator(
-    `/${liBai.username}`,
-    ':username',
-    { loginUser: liBai.username },
-  ),
+  identityDecoratorWithMemoryRouterGenerator(`/${liBai.username}`, ':username', { loginUser: liBai.username }),
   (Story, Context) => (
     <ThemeProvider>
-      <Story/>
+      <Story />
     </ThemeProvider>
   ),
 ];

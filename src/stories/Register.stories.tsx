@@ -6,6 +6,7 @@ import { Register } from 'views/Register';
 import { notRegisterUser } from 'mocks/identity';
 import { identityDecoratorGenerator, savedIdentity } from 'utils/stories';
 import { ThemeProvider } from 'effects/Theme';
+import './App.css';
 
 export default {
   title: 'Views/Regiser',
@@ -14,22 +15,20 @@ export default {
     identityDecoratorGenerator(),
     (Story, Context) => (
       <ThemeProvider>
-        <Story/>
+        <Story />
       </ThemeProvider>
     ),
   ],
   args: { savedIdentity },
 } as ComponentMeta<typeof Register>;
 
-const Template: ComponentStory<typeof Register> = (args) => (
-  <Register/>
-);
+const Template: ComponentStory<typeof Register> = (args) => <Register />;
 
 export const Preview = Template.bind({});
 
 export const Auto = Template.bind({});
 
-Auto.play = async({ canvasElement }) => {
+Auto.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   const usernameInput = canvas.getByPlaceholderText('username');
@@ -47,13 +46,13 @@ Auto.play = async({ canvasElement }) => {
   const passwordInput = canvas.getByPlaceholderText('password');
 
   await userEvent.type(passwordInput, notRegisterUser.password, {
-    delay: 100
+    delay: 100,
   });
 
   const rePasswordInput = canvas.getByPlaceholderText('re-enter password');
 
   await userEvent.type(rePasswordInput, notRegisterUser.password, {
-    delay: 100
+    delay: 100,
   });
 
   const submitButton = canvas.getByRole('button');

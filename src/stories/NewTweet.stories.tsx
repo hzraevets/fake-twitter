@@ -5,6 +5,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { NewTweet } from 'views/Timeline/NewTweet';
 import { identityDecoratorGenerator, savedIdentity } from 'utils/stories';
 import { timeLineQuery } from 'query/TimeLine';
+import './App.css';
 
 export default {
   title: 'Components/NewTweet',

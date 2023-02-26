@@ -6,20 +6,13 @@ import { within, userEvent } from '@storybook/testing-library';
 
 import { Timeline } from 'views/Timeline';
 import { testUser, liBai } from 'mocks/identity';
-import {
-  savedIdentity,
-  identityDecoratorWithMemoryRouterGenerator,
-  identityDecoratorGenerator,
-} from 'utils/stories';
+import { savedIdentity, identityDecoratorWithMemoryRouterGenerator, identityDecoratorGenerator } from 'utils/stories';
 import { timeLineQuery } from 'query/TimeLine';
 import { TweetContext, TweetProvider } from 'effects/Tweet';
-import {
-  storage as allTweets,
-  nextTweetId,
-  mockedReadTimeline as readTimeline,
-} from 'mocks/tweet';
+import { storage as allTweets, nextTweetId, mockedReadTimeline as readTimeline } from 'mocks/tweet';
 import { Page404 } from 'views/Page404';
 import { ThemeProvider } from 'effects/Theme';
+import './App.css';
 
 export default {
   title: 'Views/Timeline',
@@ -27,41 +20,32 @@ export default {
   args: { savedIdentity },
 } as ComponentMeta<typeof Timeline>;
 
-const Template: ComponentStory<typeof Timeline> = () => (
-  <Timeline/>
-);
+const Template: ComponentStory<typeof Timeline> = () => <Timeline />;
 
 export const Preview = Template.bind({});
 
 Preview.decorators = [
-  identityDecoratorWithMemoryRouterGenerator(
-    `/${testUser.username}`,
-    ':username',
-    { loginUser: testUser.username },
-    (element) => {
-      return (
-        <div className="app relative h-screen w-full min-w-min bg-blue-400 dark:bg-black text-black dark:text-white">
-          <TweetContext.Provider
-            value={{
-              allTweets,
-              nextTweetId,
-              readTimeline,
-              addNewTweet: () => null,
-              editTweet: () => null,
-              deleteTweet: () => null,
-            }}
-          >
-            <QueryClientProvider client={timeLineQuery}>
-              {element}
-            </QueryClientProvider>
-          </TweetContext.Provider>
-        </div>
-      );
-    },
-  ),
+  identityDecoratorWithMemoryRouterGenerator(`/${testUser.username}`, ':username', { loginUser: testUser.username }, (element) => {
+    return (
+      <div className="app relative h-screen w-full min-w-min bg-blue-400 dark:bg-black text-black dark:text-white">
+        <TweetContext.Provider
+          value={{
+            allTweets,
+            nextTweetId,
+            readTimeline,
+            addNewTweet: () => null,
+            editTweet: () => null,
+            deleteTweet: () => null,
+          }}
+        >
+          <QueryClientProvider client={timeLineQuery}>{element}</QueryClientProvider>
+        </TweetContext.Provider>
+      </div>
+    );
+  }),
   (Story, Context) => (
     <ThemeProvider>
-      <Story/>
+      <Story />
     </ThemeProvider>
   ),
 ];
@@ -69,34 +53,25 @@ Preview.decorators = [
 export const LiBai = Template.bind({});
 
 LiBai.decorators = [
-  identityDecoratorGenerator(
-    { loginUser: liBai.username },
-    (element) => {
-      return (
-        <div className="app relative h-screen w-full min-w-min bg-blue-400 dark:bg-black text-black dark:text-white">
-          <TweetProvider>
-            <QueryClientProvider client={timeLineQuery}>
-              <MemoryRouter initialEntries={[`/${liBai.username}`]}>
-                <Routes>
-                  <Route
-                    path="*"
-                    element={<Page404/>}
-                  />
-                  <Route
-                    path=":username"
-                    element={element}
-                  />
-                </Routes>
-              </MemoryRouter>
-            </QueryClientProvider>
-          </TweetProvider>
-        </div>
-      );
-    }
-  ),
+  identityDecoratorGenerator({ loginUser: liBai.username }, (element) => {
+    return (
+      <div className="app relative h-screen w-full min-w-min bg-blue-400 dark:bg-black text-black dark:text-white">
+        <TweetProvider>
+          <QueryClientProvider client={timeLineQuery}>
+            <MemoryRouter initialEntries={[`/${liBai.username}`]}>
+              <Routes>
+                <Route path="*" element={<Page404 />} />
+                <Route path=":username" element={element} />
+              </Routes>
+            </MemoryRouter>
+          </QueryClientProvider>
+        </TweetProvider>
+      </div>
+    );
+  }),
   (Story, Context) => (
     <ThemeProvider>
-      <Story/>
+      <Story />
     </ThemeProvider>
   ),
 ];
@@ -104,7 +79,7 @@ LiBai.decorators = [
 LiBai.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
-  const textarea = canvas.getByPlaceholderText('What\'s happening?');
+  const textarea = canvas.getByPlaceholderText("What's happening?");
   const button = canvas.getByRole('button');
 
   const tweets = [

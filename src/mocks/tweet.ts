@@ -1,9 +1,4 @@
-import {
-  ReadNonDeleteTweetParams,
-  ReadNonDeleteTweetResponse,
-  Tweet,
-  TweetStorage,
-} from 'models';
+import { ReadNonDeleteTweetParams, ReadNonDeleteTweetResponse, Tweet, TweetStorage } from 'models';
 
 export const testUserTweet1: Tweet = {
   id: 1,
@@ -30,10 +25,7 @@ export const storage: TweetStorage = {
     [testUserTweet1.id]: testUserTweet1,
     [liBaiTweet1.id]: liBaiTweet1,
   },
-  order: [
-    liBaiTweet1.id,
-    testUserTweet1.id,
-  ],
+  order: [liBaiTweet1.id, testUserTweet1.id],
 };
 
 export const nextTweetId = 3;
@@ -44,7 +36,7 @@ export const mockedReadTimeline = ({ start, offset = 1 }: ReadNonDeleteTweetPara
 
   const { hashMap, order } = storage;
 
-  for (nextCursor = start; (dat.length < offset) && nextCursor < order.length; nextCursor++) {
+  for (nextCursor = start; dat.length < offset && nextCursor < order.length; nextCursor++) {
     const tweet = hashMap[order[nextCursor]];
 
     if (!tweet.isDeleted) {
@@ -59,5 +51,4 @@ export const mockedReadTimeline = ({ start, offset = 1 }: ReadNonDeleteTweetPara
   }
 
   return Promise.resolve<ReadNonDeleteTweetResponse>(res);
-}
-
+};

@@ -95,7 +95,7 @@ exports[`TweetsList render empty TweetList to snapshot 1`] = `
                             <span
                               className="text-xs text-slate-500 float-right"
                             >
-                              1 day ago
+                              2 days ago
                             </span>
                           </div>
                         </h4>

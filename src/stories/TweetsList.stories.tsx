@@ -7,11 +7,8 @@ import { TweetsList } from 'views/Timeline/TweetsList';
 import { identityDecoratorGenerator, savedIdentity } from 'utils/stories';
 import { timeLineQuery } from 'query/TimeLine';
 import { TweetContext } from 'effects/Tweet';
-import {
-  storage as allTweets,
-  nextTweetId,
-  mockedReadTimeline as readTimeline,
-} from 'mocks/tweet';
+import { storage as allTweets, nextTweetId, mockedReadTimeline as readTimeline } from 'mocks/tweet';
+import './App.css';
 
 export default {
   title: 'Components/TweetsList',
@@ -39,8 +36,6 @@ export default {
   ],
 } as ComponentMeta<typeof TweetsList>;
 
-const Template: ComponentStory<typeof TweetsList> = () => (
-  <TweetsList/>
-);
+const Template: ComponentStory<typeof TweetsList> = () => <TweetsList />;
 
 export const Preview = Template.bind({});
