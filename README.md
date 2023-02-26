@@ -1,46 +1,108 @@
-# Getting Started with Create React App
+# Fake Twitter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A very simple Twitter-like web application, assigned from [react-assignments](https://github.com/ThaddeusJiang/react-assignments/tree/main/fake-twitter), you can check it online first https://hzraevets.github.io/fake-twitter/.
 
-## Available Scripts
+### Tech-Stack
 
-In the project directory, you can run:
+- [React](https://reactjs.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Ant Design](https://ant.design/)
+- [React Query](https://react-query-v3.tanstack.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Storybook](https://storybook.js.org/)
 
-### `npm start`
+Not all the 3rd-party libraries / tools which are used in this project, are listed here. Like this project is initialized with [create react app](https://create-react-app.dev/). So, feel free to explore them at your own.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Features
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [x] Register an account (store data in LocalStorage)
+- [x] Login & logout
+- [x] CRUD tweets
+- [x] Load more tweets via scroll down
+- [x] Switch theme
+- [x] 1 column in iPhone screen size, 2 columns in iPad screen size
 
-### `npm test`
+### Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You should clone this project to your machine first:
 
-### `npm run build`
+```bash
+git clone https://github.com/hzraevets/fake-twitter
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+enter into the project folder:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+cd fake-twitter
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+and make sure you have [Node.js](https://nodejs.org/en/) installed first, then execute this command to install all dependencies:
 
-### `npm run eject`
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Development
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You may want to add some more features into this project, or modify existing code. So you should start up a dev server locally to check what's the app be like at real-time. Just execute this command:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Open http://localhost:3000 to view it in the browser. The page will reload if you make edits. You will also see any lint errors in the console.
 
-## Learn More
+#### Add new commit
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Once you finish your task and want to add a new commit, instead of using `git commit`, you should use the following command here:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run commit
+```
+
+### Testing
+
+```bash
+npm test
+```
+
+Launches the test runner in the interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### Storybook
+
+```bash
+npm run storybook
+```
+
+Open http://localhost:6006/?path=/story/views-login--preview to view all the stories.
+
+### Deployment
+
+#### App
+
+If you want to do all these work at your own:
+
+```bash
+npm run build
+```
+
+Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
+
+Also, dockerfile is provided under `ci`, you can build it to an image first:
+
+```bash
+docker build -f ci/app.dockerfile -t fake-twitter-app .
+```
+
+and then run the container:
+
+```bash
+docker run -d --name app -p 3000:80 fake-twitter-app
+```
+
+Then you can visit http://localhost:3000 to check the app.
+
+#### Storybook
+
+Deploy storybook is similar to deploy app.

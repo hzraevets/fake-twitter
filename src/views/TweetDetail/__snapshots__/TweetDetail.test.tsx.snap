@@ -116,7 +116,7 @@ exports[`TweetDetail render login user own tweet to snapshot 1`] = `
                 className="text-xs text-slate-500 float-right select-none mt-1"
               >
                 created 
-                3 days ago
+                4 days ago
               </span>
             </div>
             <div

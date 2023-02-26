@@ -6,5 +6,5 @@ module.exports = {
   '*.jsx': scriptCommand,
   '*.ts': scriptCommand,
   '*.tsx': scriptCommand,
-  '*.md': 'prettier --list-different',
+  '*.md': 'prettier --write',
 };
